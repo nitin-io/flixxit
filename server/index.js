@@ -1,5 +1,6 @@
 import express from "express";
 import { config } from "dotenv";
+import connectDB from "./services/db.js";
 config();
 
 const app = express();
@@ -21,6 +22,8 @@ app.get("/*", (req, res) => {
   res.sendFile("./public/dist/index.html");
 });
 
-app.listen(process.env.PORT, () => {
-  console.log(`Server running on port ${process.env.PORT}`);
+connectDB.then(() => {
+  app.listen(process.env.PORT, () => {
+    console.log(`Server running on port ${process.env.PORT}`);
+  });
 });
