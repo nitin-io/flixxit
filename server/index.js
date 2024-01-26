@@ -1,6 +1,7 @@
 import express from "express";
 import { config } from "dotenv";
 import connectDB from "./services/db.js";
+import apiRoutes from "./routes/api/v1/index.js";
 config();
 
 const app = express();
@@ -14,9 +15,7 @@ app.use(express.static("public/client"));
 app.use(express.static("views"));
 
 // Route
-app.get("/hello", (req, res) => {
-  res.render("index");
-});
+app.use("/api", apiRoutes);
 
 app.get("/*", (req, res) => {
   res.sendFile("./public/dist/index.html");
