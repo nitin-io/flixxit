@@ -22,15 +22,13 @@ const userSchema = new Schema(
   }
 );
 
-// userSchema.pre("save", function (next) {
-//   if (this.isModified("password")) {
-//     console.log("Modified");
-//     this.password = hashSync(password, 10);
-//     next();
-//   }
-//   console.log("Not Modified");
-//   next();
-// });
+userSchema.pre("save", function (next) {
+  if (this.isModified("password")) {
+    this.password = hashSync(this.password, 10);
+    next();
+  }
+  next();
+});
 
 const User = model("user", userSchema);
 

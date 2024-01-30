@@ -9,9 +9,13 @@ export const createUser = async (name, email, password) => {
     }
     const newUser = new User({ name, email, password });
     await newUser.save();
-    const token = await jwt.sign({ name, email }, process.env.JWT_SECRET);
-    return { user: { name, email }, token };
+    const token = await jwt.sign(
+      { id: newUser._id, name, email },
+      process.env.JWT_SECRET
+    );
+    return { user: { id: newUser._id, name, email }, token };
   } catch (error) {
-    throw error.message;
+    console.log(error);
+    throw error;
   }
 };

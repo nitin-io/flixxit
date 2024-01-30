@@ -26,3 +26,7 @@ dist-ssr
 
 # credentials
 .env
+
+# temp
+sum.js
+sum.test.js
