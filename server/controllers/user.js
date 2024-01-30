@@ -26,7 +26,7 @@ export const loginUser = async (email, password) => {
     const user = await User.findOne({ email });
     if (user) {
       await user.checkPassword(password);
-
+      await user.updateLastLoggedIn();
       const token = jwt.sign(
         { id: user._id, email: user.email },
         process.env.JWT_SECRET

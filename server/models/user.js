@@ -16,7 +16,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    lastLogedIn: {
+    lastLoggedIn: {
       type: Date,
       default: Date.now(),
     },
@@ -45,6 +45,12 @@ userSchema.methods.checkPassword = function (password) {
   } catch (error) {
     return Promise.reject(error);
   }
+};
+
+userSchema.methods.updateLastLoggedIn = function () {
+  return this.model("user").findByIdAndUpdate(this._id, {
+    lastLoggedIn: Date.now(),
+  });
 };
 
 const User = model("user", userSchema);
