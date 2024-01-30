@@ -1,4 +1,4 @@
-import { hashSync } from "bcrypt";
+import { compareSync, hashSync } from "bcrypt";
 import { Schema, model } from "mongoose";
 
 const userSchema = new Schema(
@@ -16,6 +16,10 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    lastLogedIn: {
+      type: Date,
+      default: Date.now(),
+    },
   },
   {
     timestamps: true,
@@ -29,6 +33,19 @@ userSchema.pre("save", function (next) {
   }
   next();
 });
+
+userSchema.methods.checkPassword = function (password) {
+  try {
+    const match = compareSync(password, this.password);
+    console.log(match);
+    if (match) {
+      return Promise.resolve();
+    }
+    return Promise.reject({ status: 400, message: "incorrect password" });
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
 
 const User = model("user", userSchema);
 
