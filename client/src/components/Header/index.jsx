@@ -4,7 +4,7 @@ import Banner from "./Banner";
 
 const Header = () => {
   return (
-    <header>
+    <header className="background-image center">
       <NavBar />
       <Banner />
     </header>

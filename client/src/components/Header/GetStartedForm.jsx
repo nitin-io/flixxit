@@ -1,8 +1,11 @@
 const GetStartedForm = () => {
   return (
     <form>
-      <input type="text" name="email" placeholder="Email address" />
-      <button>Get Started &gt; </button>
+      <div className="form-input-div">
+        <input type="text" className="form-input-box" placeholder="" />
+        <label className="form-input-label">Email ID</label>
+      </div>
+      <button className="btn">Get Started &gt; </button>
     </form>
   );
 };

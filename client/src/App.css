@@ -1,5 +1,111 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;700&display=swap");
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: "Rubik", sans-serif;
+}
+
+/* Comman */
+.background-image {
+  height: 100vh;
+  background: url("images/header-background.jpg");
+  box-shadow: inset 0 0 10rem 18rem #000b;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.center {
+  display: grid;
+  place-content: center;
+  color: white;
+  text-align: center;
+}
+
+.btn {
+  background-color: #f00;
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  width: 100%;
+  cursor: pointer;
+  transition: transform 300ms;
+  font-size: 1.2rem;
+}
+
+.btn:hover {
+  transform: scale(1.02);
+}
+
+/* Form Inputs */
+form {
+  background-color: #000b;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 1rem;
+  border-radius: 4px;
+  width: 40vw;
+}
+
+form > button.btn {
+  align-self: center;
+}
+
+.form-input-div {
+  position: relative;
+  align-self: center;
+  width: 100%;
+}
+
+.form-input-box {
+  padding: 0.5rem;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  background-color: #111b;
+  color: white;
+  width: 100%;
+}
+
+.form-input-label {
+  position: absolute;
+  top: 50%;
+  left: 5%;
+  transform: translate(0, -50%);
+  transition: all 300ms;
+  color: #fffb;
+  padding: 0 5px;
+}
+
+.form-input-box:focus ~ .form-input-label,
+.form-input-box:not(:placeholder-shown) ~ .form-input-label {
+  transform: scale(0.8) translate(-10%, -190%);
+  background-color: #111d;
+  color: #fff;
+}
+
+.form-link {
+  color: #fff;
+  text-decoration: none;
+}
+
+.form-link:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+@media screen and (width < 768px) {
+  form {
+    width: 80vw;
+  }
+}
+
+@media screen and (width < 480px) {
+  form {
+    width: 90vw;
+  }
 }
