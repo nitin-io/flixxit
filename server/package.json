@@ -4,9 +4,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon -r dotenv/config index.js",
-    "test": "jest"
+    "start": "node ./src/index.js",
+    "dev": "nodemon -r dotenv/config ./src/index.js",
+    "test": "NODE_OPTIONS=\"$NODE_OPTIONS --experimental-vm-modules\" npx jest --watchAll"
   },
   "license": "MIT",
   "devDependencies": {
