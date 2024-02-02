@@ -14,6 +14,11 @@ app.use(express.static("public"));
 app.use(express.static("public/client"));
 app.use(express.static("views"));
 
+// Test Route
+app.get("/test", (req, res) => {
+  res.json({ success: true, message: "Hello, World!" });
+});
+
 // Route
 app.use("/api", apiRoutes);
 
