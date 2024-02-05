@@ -1,13 +1,26 @@
-import { createUser } from "../../../controllers/user.js";
+import { createUser } from "../../../controllers/user.controller.js";
 
-const signUpUser = async (req, res) => {
+export default async (req, res) => {
   try {
     const { name, email, password } = req.body;
-    const { user, token } = await createUser(name, email, password);
-    res.json({ success: true, user, token });
+    const { user, token, message } = await createUser(name, email, password);
+    if (user && token) {
+      return res.status(201).json({
+        success: true,
+        message: "User created successfully",
+        user,
+        token,
+      });
+    }
+    res.status(400).json({
+      success: false,
+      message,
+    });
   } catch (error) {
-    res.status(500).json({ success: false, error: error });
+    console.log(error);
+    res.status(500).json({
+      success: false,
+      message: "Something is wrong, please try later",
+    });
   }
 };
-
-export default signUpUser;

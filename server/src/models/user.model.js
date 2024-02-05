@@ -37,7 +37,6 @@ userSchema.pre("save", function (next) {
 userSchema.methods.checkPassword = function (password) {
   try {
     const match = compareSync(password, this.password);
-    console.log(match);
     if (match) {
       return Promise.resolve();
     }

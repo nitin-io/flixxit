@@ -1,17 +1,24 @@
-import { loginUser } from "../../../controllers/user.js";
+import { loginUser } from "../../../controllers/user.controller.js";
 
 export default async (req, res) => {
   try {
     const { email, password } = req.body;
-    if (!email || !password) {
-      res.status(400).json({ message: "Email and password are required." });
+
+    const { user, token, message } = await loginUser(email, password);
+
+    if (user && token) {
+      return res.json({
+        user,
+        token,
+        success: true,
+        message: "Logged in successfully",
+      });
     }
-    const { user, token } = await loginUser(email, password);
-    return res.json({ user, token, success: true });
+    return res.status(401).json({ success: false, message });
   } catch (error) {
     res.status(500).json({
       success: false,
-      error,
+      message: "Something is wrong, please try later",
     });
   }
 };

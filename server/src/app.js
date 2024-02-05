@@ -1,7 +1,7 @@
 import express from "express";
 import { config } from "dotenv";
-import connectDB from "./services/db.js";
 import apiRoutes from "./routes/api/v1/index.js";
+import morgan from "morgan";
 config();
 
 const app = express();
@@ -13,6 +13,9 @@ app.use(express.json());
 app.use(express.static("public"));
 app.use(express.static("public/client"));
 app.use(express.static("views"));
+
+// Third-party middlewares
+app.use(morgan("dev"));
 
 // Test Route
 app.get("/test", (req, res) => {
@@ -26,8 +29,4 @@ app.get("/*", (req, res) => {
   res.sendFile("./public/dist/index.html");
 });
 
-connectDB.then(() => {
-  app.listen(process.env.PORT, () => {
-    console.log(`Server running on port ${process.env.PORT}`);
-  });
-});
+export default app;

@@ -1,13 +1,18 @@
-import { compareSync, hashSync } from "bcrypt";
-import User from "../models/user.js";
+import User from "../models/user.model.js";
 import jwt from "jsonwebtoken";
 
 export const createUser = async (name, email, password) => {
   try {
-    const userExist = await User.findOne({ email });
-    if (userExist) {
-      throw "email already exist";
+    if (!name || !email || !password) {
+      return { message: "Name, email, and password are required." };
     }
+
+    const userExist = await User.findOne({ email });
+
+    if (userExist) {
+      return { message: "E-mail already exist" };
+    }
+
     const newUser = new User({ name, email, password });
     await newUser.save();
     const token = await jwt.sign(
@@ -16,7 +21,6 @@ export const createUser = async (name, email, password) => {
     );
     return { user: { id: newUser._id, name, email }, token };
   } catch (error) {
-    console.log(error);
     throw error;
   }
 };
@@ -37,8 +41,8 @@ export const loginUser = async (email, password) => {
         token,
       };
     }
-    throw new Error("User not found");
+    return { message: "User not found" };
   } catch (error) {
-    throw { error };
+    return { message: "Email or password is incorrect" };
   }
 };
