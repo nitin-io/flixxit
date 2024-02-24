@@ -26,9 +26,12 @@ const Featured = ({ type }) => {
           </select>
         </div>
       )}
-      <img src="spiderman-homecoming-movie-poster-c1-1920x1080.jpg" alt="" />
+      <img
+        src="images/spiderman-homecoming-movie-poster-c1-1920x1080.jpg"
+        alt="featured"
+      />
       <div className="info">
-        <img src="Spider-Man.svg" alt="spider-man-title" />
+        <img src="images/Spider-Man.svg" alt="spider-man-title" />
         <span className="desc">
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quae unde
           sit eveniet. Corrupti, quam nemo nisi, molestias, consequatur

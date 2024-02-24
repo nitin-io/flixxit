@@ -9,7 +9,10 @@ import "./listItem.css";
 const ListItem = () => {
   return (
     <div className="list-item">
-      <img src="spiderman-homecoming-movie-poster-c1-1920x1080.jpg" alt="" />
+      <img
+        src="images/spiderman-homecoming-movie-poster-c1-1920x1080.jpg"
+        alt=""
+      />
       <div className="item-info">
         <div className="icons">
           <PlayArrow />
