@@ -1,5 +1,3 @@
-import GetStartedForm from "./GetStartedForm";
-
 const Banner = () => {
   return (
     <div className="banner-content">
@@ -8,7 +6,6 @@ const Banner = () => {
       <p>
         Ready to watch? Enter your email to create or restart your membership.
       </p>
-      <GetStartedForm />
     </div>
   );
 };

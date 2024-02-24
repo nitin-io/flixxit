@@ -6,6 +6,9 @@ const NavBar = () => {
       <h2 className="nav-brand">FLIXXIT</h2>
       <ul className="nav-list">
         <li className="nav-item">
+          <Link to="/signup" className="nav-link">
+            Sign Up
+          </Link>
           <Link to="/signin" className="nav-link">
             Sign In
           </Link>

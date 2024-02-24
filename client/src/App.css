@@ -79,6 +79,7 @@ form > button.btn {
   transition: all 300ms;
   color: #fffb;
   padding: 0 5px;
+  pointer-events: none;
 }
 
 .form-input-box:focus ~ .form-input-label,

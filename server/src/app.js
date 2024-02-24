@@ -2,10 +2,16 @@ import express from "express";
 import { config } from "dotenv";
 import apiRoutes from "./routes/api/v1/index.js";
 import morgan from "morgan";
+import cors from "cors";
 config();
 
 const app = express();
 
+app.use(
+  cors({
+    origin: ["http://127.0.0.1:5173"],
+  })
+);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
