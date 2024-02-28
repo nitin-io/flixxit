@@ -40,13 +40,9 @@ userSchema.pre("save", function (next) {
 
 userSchema.methods.checkPassword = function (password) {
   try {
-    const match = compareSync(password, this.password);
-    if (match) {
-      return Promise.resolve();
-    }
-    return Promise.reject({ status: 400, message: "incorrect password" });
+    return compareSync(password, this.password);
   } catch (error) {
-    return Promise.reject(error);
+    return error;
   }
 };
 

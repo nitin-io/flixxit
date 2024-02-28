@@ -1,11 +1,15 @@
 import express from "express";
 import { config } from "dotenv";
-import apiRoutes from "./routes/api/v1/index.js";
+import movieRoutes from "./routes/v1/movie.routes.js";
+import userRoutes from "./routes/v1/user.routes.js";
 import morgan from "morgan";
 import cors from "cors";
+import { fileURLToPath } from "node:url";
+import { dirname, resolve } from "node:path";
 config();
 
 const app = express();
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 app.use(
   cors({
@@ -29,10 +33,11 @@ app.get("/test", (req, res) => {
 });
 
 // Route
-app.use("/api", apiRoutes);
+app.use("/api/v1/users", userRoutes);
+app.use("/api/v1/movies", movieRoutes);
 
-app.get("/*", (req, res) => {
-  res.sendFile("./public/dist/index.html");
+app.use("/*", (req, res) => {
+  res.sendFile(resolve(__dirname, `../public/dist/index.html`));
 });
 
 export default app;

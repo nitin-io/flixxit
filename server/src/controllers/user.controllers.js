@@ -49,7 +49,7 @@ export const loginUser = async (req, res) => {
       return res.status(401).json({ message: "Incorrect Password!" });
     }
     const accessToken = await jwt.sign(
-      { id: newUser._id, email },
+      { id: user._id, email },
       process.env.JWT_SECRET
     );
     await user.updateLastLoggedIn();
