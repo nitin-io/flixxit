@@ -4,6 +4,7 @@
   transition: all 300ms;
   width: 100%;
   z-index: 1;
+  color: #fff;
   background: linear-gradient(to top, transparent 0%, #0006 50%);
 }
 

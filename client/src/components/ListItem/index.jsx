@@ -4,6 +4,7 @@ import {
   ThumbDownAltOutlined,
   ThumbUpAltOutlined,
 } from "@material-ui/icons";
+import { Link } from "react-router-dom";
 import "./listItem.css";
 
 const ListItem = () => {
@@ -15,7 +16,9 @@ const ListItem = () => {
       />
       <div className="item-info">
         <div className="icons">
-          <PlayArrow />
+          <Link to="/watch/:id">
+            <PlayArrow />
+          </Link>
           <Add />
           <ThumbUpAltOutlined />
           <ThumbDownAltOutlined />
