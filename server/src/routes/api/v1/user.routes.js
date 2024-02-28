@@ -1,6 +1,6 @@
 import { Router } from "express";
-import signUpUser from "./signup-user.js";
-import loginUser from "./login-user.js";
+import signUpUser from "./user.controllers.js";
+import loginUser from "./user.controllers.js";
 
 const router = Router();
 
