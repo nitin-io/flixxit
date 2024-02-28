@@ -18,11 +18,34 @@ export const createMovie = async (req, res) => {
 
 export const getMovies = async (req, res) => {
   try {
-    const movies = await Movie.find();
-    res.json(movies);
+    const { type, genre } = req.query;
+
+    let movies = [];
+    if (type && genre) {
+      movies = await List.aggregate([
+        { $sample: { size: 10 } },
+        { $match: { listType: type, genre } },
+      ]);
+    } else if (type) {
+      movies = await List.aggregate([
+        { $sample: { size: 10 } },
+        { $match: { listType: type } },
+      ]);
+    } else if (genre) {
+      movies = await List.aggregate([
+        { $sample: { size: 10 } },
+        { $match: { genre } },
+      ]);
+    } else {
+      movies = await List.aggregate([{ $sample: { size: 10 } }]);
+    }
+    res.json({ ...movies, success: true });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "Please try again later, server error" });
+    res.status(500).json({
+      success: false,
+      message: "Please try again later, server error",
+    });
   }
 };
 

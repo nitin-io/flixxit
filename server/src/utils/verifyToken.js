@@ -7,7 +7,7 @@ export default function (req, res, next) {
     if (!authHeader)
       return res.status(401).json({ message: "authorization token not found" });
     const token = authHeader.split(" ")[1];
-    jwt.verify(token, process.env.SECRET_KEY, (err, user) => {
+    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
       if (err) return res.status(403).json({ message: "Invalid token" });
       req.userId = user.id;
       next();
