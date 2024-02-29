@@ -1,12 +1,12 @@
 import NavBar from "./NavBar";
 import "./Header.css";
-import Banner from "./Banner";
+import { Outlet } from "react-router-dom";
 
 const Header = () => {
   return (
     <header className="background-image center">
       <NavBar />
-      <Banner />
+      <Outlet />
     </header>
   );
 };

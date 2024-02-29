@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Login = () => {
   return (
-    <div className="background-image center">
+    <>
       <form action="POST">
         <h2>Sign In</h2>
         <div className="form-input-div">
@@ -18,7 +18,7 @@ const Login = () => {
           New to FLIXXIT?
         </Link>
       </form>
-    </div>
+    </>
   );
 };
 

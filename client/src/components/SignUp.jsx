@@ -19,7 +19,7 @@ const SignUp = () => {
     }
   };
   return (
-    <div className="background-image center">
+    <>
       <form onSubmit={handleSubmit}>
         <h2>Sign Up</h2>
         <div className="form-input-div">
@@ -64,7 +64,7 @@ const SignUp = () => {
           Already have an account?
         </Link>
       </form>
-    </div>
+    </>
   );
 };
 
