@@ -1,4 +1,4 @@
-import { Link, redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
@@ -8,18 +8,18 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { data } = await axios.post("/api/v1/signup", {
-      name,
-      email,
-      password,
-    });
-    console.log(data);
-    if (data.success) {
-      redirect("/dashboard");
-    }
+    const response = await axios.post(
+      "http://127.0.0.1:5000/api/v1/user/signup",
+      {
+        name,
+        email,
+        password,
+      }
+    );
+    console.log(response);
   };
   return (
-    <div className="background-image center">
+    <>
       <form onSubmit={handleSubmit}>
         <h2>Sign Up</h2>
         <div className="form-input-div">
@@ -64,7 +64,7 @@ const SignUp = () => {
           Already have an account?
         </Link>
       </form>
-    </div>
+    </>
   );
 };
 

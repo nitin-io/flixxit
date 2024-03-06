@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 
 const PrivateRoutes = () => {
   const [ok] = useState(true);
-  return ok ? <Outlet /> : <h1>Loading...</h1>;
+  return ok ? <Outlet /> : <Navigate to="/login" />;
 };
 
 export default PrivateRoutes;
