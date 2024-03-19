@@ -4,16 +4,14 @@ import {
   ThumbDownAltOutlined,
   ThumbUpAltOutlined,
 } from "@material-ui/icons";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import "./listItem.css";
 
-const ListItem = () => {
+const ListItem = ({ cover, overview }) => {
   return (
     <div className="list-item">
-      <img
-        src="images/spiderman-homecoming-movie-poster-c1-1920x1080.jpg"
-        alt=""
-      />
+      <img src={`https://image.tmdb.org/t/p/w500${cover}`} alt="" />
       <div className="item-info">
         <div className="icons">
           <Link to="/watch/:id">
@@ -28,13 +26,15 @@ const ListItem = () => {
           <span>18+</span>
           <span>2023</span>
         </div>
-        <div className="desc">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident
-          incidunt natus eveniet voluptatibus,
-        </div>
+        <div className="desc">{overview}</div>
       </div>
     </div>
   );
+};
+
+ListItem.propTypes = {
+  cover: PropTypes.string,
+  overview: PropTypes.string,
 };
 
 export default ListItem;

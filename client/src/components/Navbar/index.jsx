@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./navbar.css";
-import { ArrowDropDown, Notifications, Search } from "@material-ui/icons";
+import { ArrowDropDown, Notifications } from "@material-ui/icons";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -13,13 +13,8 @@ const Navbar = () => {
     <div className={isScrolled ? "navbar scrolled" : "navbar"}>
       <div className="container">
         <div className="left">
-          <img
-            src="https://duckduckgo.com/i/0697e8c5.png"
-            alt=""
-            width={"150px"}
-          />
+          <h2 className="nav-brand">FLIXXIT</h2>
           <ul>
-            <li>Homepage</li>
             <li>Movies</li>
             <li>Series</li>
             <li>New And Popular</li>
@@ -27,8 +22,15 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="right">
-          <Search />
-          <span>KID</span>
+          <div className="form-input-div">
+            <input
+              type="text"
+              className="form-input-box"
+              placeholder="Search movie or webseries"
+              onChange={() => {}}
+              required
+            />
+          </div>
           <Notifications />
           <img
             src="https://avatars.githubusercontent.com/u/76252414?v=4"

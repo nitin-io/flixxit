@@ -49,3 +49,8 @@
   display: flex;
   gap: 0.5rem;
 }
+
+h1.title {
+  font-size: 3rem;
+  font-weight: 900;
+}

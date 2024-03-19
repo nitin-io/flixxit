@@ -8,9 +8,9 @@ const Home = () => {
     <div className="home">
       <Navbar />
       <Featured />
-      <List />
-      <List />
-      <List />
+      <List genre={"popular"} title="Popular Movies" />
+      <List genre={"popular"} title="Popular Movies" />
+      <List genre={"popular"} title="Popular Movies" />
     </div>
   );
 };

@@ -1,8 +1,35 @@
 import PropTypes from "prop-types";
 import "./featured.css";
 import { InfoOutlined, PlayArrow } from "@material-ui/icons";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const Featured = ({ type }) => {
+  const [featuredMovie, setfeaturedMovie] = useState({});
+  const [movieGenres, setMovieGenres] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(
+        `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=${Math.floor(
+          Math.random() * (500 - 1 + 1) + 1
+        )}&sort_by=popularity.desc&api_key=${import.meta.env.VITE_TMDB_API_KEY}`
+      )
+      .then((res) => {
+        console.log(res.data);
+        setfeaturedMovie(res.data.results[0]);
+      })
+      .catch((err) => console.log(err));
+
+    axios
+      .get(
+        `https://api.themoviedb.org/3/genre/movie/list?api_key=${
+          import.meta.env.VITE_TMDB_API_KEY
+        }`
+      )
+      .then((res) => setMovieGenres(res.data))
+      .catch((err) => console.log(err));
+  }, []);
   return (
     <div className="featured">
       {type && (
@@ -10,34 +37,19 @@ const Featured = ({ type }) => {
           <span>{type === "movie" ? "Movies" : "TV Series"}</span>
           <select name="genre" id="genre">
             <option>Genre</option>
-            <option value="adventure">adventure</option>
-            <option value="comedy">comedy</option>
-            <option value="crime">crime</option>
-            <option value="fantasy">fantasy</option>
-            <option value="historical">historical</option>
-            <option value="horror">horror</option>
-            <option value="romance">romance</option>
-            <option value="sci-fi">sci-fi</option>
-            <option value="thriller">thriller</option>
-            <option value="western">western</option>
-            <option value="animation">animation</option>
-            <option value="drama">drama</option>
-            <option value="documentry">documentry</option>
+            {movieGenres?.map(({ id, name }) => (
+              <option key={id} value={name} />
+            ))}
           </select>
         </div>
       )}
       <img
-        src="images/spiderman-homecoming-movie-poster-c1-1920x1080.jpg"
+        src={`https://image.tmdb.org/t/p/original/${featuredMovie?.backdrop_path}`}
         alt="featured"
       />
       <div className="info">
-        <img src="images/Spider-Man.svg" alt="spider-man-title" />
-        <span className="desc">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quae unde
-          sit eveniet. Corrupti, quam nemo nisi, molestias, consequatur
-          asperiores alias laudantium molestiae delectus eligendi in magni
-          distinctio id cum laboriosam.
-        </span>
+        <h1 className="title">{featuredMovie.title}</h1>
+        <span className="desc">{featuredMovie?.overview}</span>
         <div className="buttons">
           <button className="play">
             <PlayArrow />
