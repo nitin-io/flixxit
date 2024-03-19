@@ -53,7 +53,13 @@ export const loginUser = async (req, res) => {
       process.env.JWT_SECRET
     );
     await user.updateLastLoggedIn();
-    return res.json({ name: user.name, email, id: user._id, accessToken });
+    return res.json({
+      name: user.name,
+      email,
+      id: user._id,
+      accessToken,
+      success: true,
+    });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Server Error" });

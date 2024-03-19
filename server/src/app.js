@@ -6,6 +6,7 @@ import morgan from "morgan";
 import cors from "cors";
 import { fileURLToPath } from "node:url";
 import { dirname, resolve } from "node:path";
+import verifyToken from "./utils/verifyToken.js";
 config();
 
 const app = express();
@@ -35,6 +36,15 @@ app.get("/test", (req, res) => {
 // Route
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/movies", movieRoutes);
+
+// JWT Token Verification Route
+app.use("/api/v1/auth/verify", verifyToken, (req, res) => {
+  try {
+    res.json({ success: true });
+  } catch (error) {
+    res.json({ success: false });
+  }
+});
 
 app.use("/*", (req, res) => {
   res.sendFile(resolve(__dirname, `../public/dist/index.html`));
