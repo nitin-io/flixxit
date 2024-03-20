@@ -1,28 +1,37 @@
-import { Link, redirect } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { saveCredentials } from "../store/slices/authSlice";
 
 const SignUp = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await axios.post("/users/signup", {
-      name,
-      email,
-      password,
-    });
-    if (response.data.success) {
-      const { success, ...auth } = response.data;
-      localStorage.setItem("auth", JSON.stringify(auth));
+    try {
+      const response = await axios.post("/users/signup", {
+        name,
+        email,
+        password,
+      });
 
-      console.log(success);
-      redirect("/home");
-    } else {
-      console.log(response.data.message);
+      if (response.data.success) {
+        const { user, token } = response.data;
+        dispatch(saveCredentials({ user, token }));
+        return navigate("/home");
+      } else {
+        console.log(response.data.message);
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
+
   return (
     <>
       <form onSubmit={handleSubmit}>

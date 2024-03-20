@@ -1,13 +1,24 @@
 import { useState } from "react";
-import "./navbar.css";
 import { ArrowDropDown, Notifications } from "@material-ui/icons";
+import { useDispatch, useSelector } from "react-redux";
+import "./navbar.css";
+import { removeCredentials } from "../../store/slices/authSlice";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const username = useSelector((state) => state.auth?.user?.name);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   window.onscroll = () => {
     setIsScrolled(!!window.scrollY);
     return () => (window.onscroll = null);
+  };
+
+  const handleLogout = () => {
+    dispatch(removeCredentials());
+    navigate("/");
   };
   return (
     <div className={isScrolled ? "navbar scrolled" : "navbar"}>
@@ -32,16 +43,12 @@ const Navbar = () => {
             />
           </div>
           <Notifications />
-          <img
-            src="https://avatars.githubusercontent.com/u/76252414?v=4"
-            alt="profile"
-            width={"40px"}
-          />
+          <div>{username}</div>
           <div className="profile">
             <ArrowDropDown />
             <ul className="options">
               <li>Settings</li>
-              <li>Logout</li>
+              <li onClick={handleLogout}>Logout</li>
             </ul>
           </div>
         </div>

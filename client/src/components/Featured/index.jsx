@@ -16,8 +16,9 @@ const Featured = ({ type }) => {
         )}&sort_by=popularity.desc&api_key=${import.meta.env.VITE_TMDB_API_KEY}`
       )
       .then((res) => {
-        console.log(res.data);
-        setfeaturedMovie(res.data.results[0]);
+        setfeaturedMovie(
+          res.data.results[Math.floor(Math.random() * (20 - 0 + 1) + 0)]
+        );
       })
       .catch((err) => console.log(err));
 

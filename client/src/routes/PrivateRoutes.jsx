@@ -1,37 +1,39 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Navigate, Outlet } from "react-router-dom";
-// import axios from "axios";
+import axios from "axios";
+import { useSelector } from "react-redux";
 
 const PrivateRoutes = () => {
-  const [isLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const authInfo = useSelector((state) => state.auth);
 
-  // Fetch saved jwt from localstorage
-  // Check for if token verified
+  useEffect(() => {
+    const main = async () => {
+      try {
+        const response = await axios.get("/auth/verify", {
+          headers: {
+            Authorization: `bearer ${authInfo.token}`,
+          },
+        });
+        if (response.data.success) {
+          console.log(response.data);
+          setIsLoggedIn(true);
+        }
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  // useEffect(() => {
-  //   try {
-  //     const { accessToken } = JSON.parse(localStorage.getItem("auth"));
-  //     if (accessToken) {
-  //       const response = axios.post(
-  //         "/auth/verify",
-  //         {},
-  //         {
-  //           headers: {
-  //             Authorization: `Bearer ${accessToken}`,
-  //           },
-  //         }
-  //       );
-  //       if (response.data.success) {
-  //         setIsLoggedIn(true);
-  //       }
-  //     } else {
-  //       localStorage.removeItem("auth");
-  //       redirect("/login");
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }, []);
+    if (authInfo?.token) main();
+    else setLoading(false);
+  }, [authInfo?.token]);
+
+  if (loading) {
+    return <h1>Loading...</h1>;
+  }
 
   return isLoggedIn ? <Outlet /> : <Navigate to="/login" />;
 };

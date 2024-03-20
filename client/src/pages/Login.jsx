@@ -1,12 +1,14 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
-import { saveToLS } from "../utils/LSOps";
+import { useDispatch } from "react-redux";
+import { saveCredentials } from "../store/slices/authSlice";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,12 +19,10 @@ const Login = () => {
       });
       console.log(response);
       if (response.data.success) {
-        const { success, ...auth } = response.data;
-        saveToLS("auth", auth);
-        console.log(success);
+        const { user, token } = response.data;
+        dispatch(saveCredentials({ user, token }));
         navigate("/home");
       } else {
-        console.log(response.success);
         navigate("/login");
       }
     } catch (error) {
