@@ -54,10 +54,8 @@ export const loginUser = async (req, res) => {
     );
     await user.updateLastLoggedIn();
     return res.json({
-      name: user.name,
-      email,
-      id: user._id,
-      accessToken,
+      user: { name: user.name, email, id: user._id },
+      token: accessToken,
       success: true,
     });
   } catch (error) {
