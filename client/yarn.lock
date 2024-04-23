@@ -911,6 +911,26 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@stripe/react-stripe-js@npm:^2.7.0":
+  version: 2.7.0
+  resolution: "@stripe/react-stripe-js@npm:2.7.0"
+  dependencies:
+    prop-types: "npm:^15.7.2"
+  peerDependencies:
+    "@stripe/stripe-js": ^1.44.1 || ^2.0.0 || ^3.0.0
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: 10c0/c33ebcf813abb16e9d1492dfbde0aa811ed577d7c4526901a42bf88ebb85d28b867b0229013dbc339dcc17599e421c073b1656beb3e0727b42095f64232998ed
+  languageName: node
+  linkType: hard
+
+"@stripe/stripe-js@npm:^3.3.0":
+  version: 3.3.0
+  resolution: "@stripe/stripe-js@npm:3.3.0"
+  checksum: 10c0/46ed343b05a1ad5f88a7fa50757a66485f66830cfd42a96fc8028e57f1c6582e82ee812d917be43a47f7500c24e0d4a69a83d32678bfe7fb2b0b79751f58dfb7
+  languageName: node
+  linkType: hard
+
 "@types/babel__core@npm:^7.20.5":
   version: 7.20.5
   resolution: "@types/babel__core@npm:7.20.5"
@@ -1505,6 +1525,8 @@ __metadata:
     "@material-ui/core": "npm:^4.12.4"
     "@material-ui/icons": "npm:^4.11.3"
     "@reduxjs/toolkit": "npm:^2.2.1"
+    "@stripe/react-stripe-js": "npm:^2.7.0"
+    "@stripe/stripe-js": "npm:^3.3.0"
     "@types/react": "npm:^18.2.43"
     "@types/react-dom": "npm:^18.2.17"
     "@vitejs/plugin-react": "npm:^4.2.1"

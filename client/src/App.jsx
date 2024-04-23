@@ -7,6 +7,7 @@ import SignUp from "./pages/SignUp";
 import Watch from "./pages/Watch";
 import Header from "./components/Header";
 import Banner from "./components/Header/Banner";
+import Payment from "./pages/Payment";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: "signup",
         element: <SignUp />,
+      },
+      {
+        path: "payment",
+        element: <Payment />,
       },
     ],
   },
